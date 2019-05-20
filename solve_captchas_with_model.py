@@ -113,18 +113,14 @@ for image_file in captcha_image_files:
     if flag == 0:
      captcha_text = "".join(predictions)
      print("CAPTCHA text is: {}".format(captcha_text))
+     print("Value copied to clipboard")
      pyperclip.copy(captcha_text)
      spam = pyperclip.paste() 
      #Show the annotated image
-     cv2.imshow("Output", output)
-     cv2.waitKey()
+     #cv2.imshow("Output", output)
+     #cv2.waitKey(1500)
     else:
-      cmd = "convert \""
-      cmd += captcha_image_files[0]
-      cmd += "\" -negate -morphology erode octagon:1 -negate -threshold 70% tmp.png"
-      os.system(cmd)
-      cmd = "convert \"tmp.png\" -negate -morphology erode octagon:1 -negate -threshold 70% tmp.png"
-      os.system(cmd)
-      cmd = "tesseract tmp.png output"
-      os.system(cmd)
-#      print ("Captcha: ".join(file('output.txt')))
+     os.system('python cap.py')
+
+
+     

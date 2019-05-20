@@ -11,11 +11,12 @@ import pyscreenshot as ImageGrab
 import time
 os.environ['TF_CPP_MIN_LOG_LEVEL'] = '3' 
 print("Checking for captcha in your screen...")
-time.sleep(3) # delay for 1 seconds
+time.sleep(4) 
 
 if __name__ == '__main__':
 # part of the screen
    im = ImageGrab.grab(bbox=(680, 485, 790, 510)) # X1,Y1,X2,Y2
+   os.system('rm -rf input_image1/*')
    im.save('input_image1/tmp.png')
 	
 
@@ -42,7 +43,7 @@ for image_file in captcha_image_files:
     # Load the image and convert it to grayscale
     image = cv2.imread(image_file)
     image = cv2.cvtColor(image, cv2.COLOR_BGR2GRAY)
-
+    os.environ['TF_CPP_MIN_LOG_LEVEL'] = '3' 
     # Add some extra padding around the image
     image = cv2.copyMakeBorder(image, 20, 20, 20, 20, cv2.BORDER_REPLICATE)
 
@@ -125,6 +126,7 @@ for image_file in captcha_image_files:
      if (format(captcha_text) != '' or format(captcha_text) is None):
        print("CAPTCHA text is: {}".format(captcha_text))
        pyperclip.copy(captcha_text)
+       os.system('rm input_image1/a.jpeg')
        spam = pyperclip.paste() 
      else:
        print("No Captcha found unfortunately.. Restarting the program again to find!")
